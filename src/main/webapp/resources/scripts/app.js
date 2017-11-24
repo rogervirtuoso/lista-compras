@@ -10,6 +10,7 @@ var app = angular.module("ListaCompras", [])
         self.novo = function () {
             self.compra = {};
             self.comprasItemList = [];
+            document.getElementById('nome').focus();
         };
 
         self.adicionarItem = function () {
@@ -19,6 +20,7 @@ var app = angular.module("ListaCompras", [])
                 valor: self.item.valor
             });
             self.cleanItem();
+            document.getElementById('descricaoItem').focus();
         };
 
         self.removerItem = function (compra) {
@@ -57,6 +59,7 @@ var app = angular.module("ListaCompras", [])
                 url: urlBase + 'compras/' + self.compra.compras.id + '/'
             }).then(function successCallback(response) {
                 self.comprasItemList = response.data.comprasItemList;
+                document.getElementById('nome').focus();
             }, function errorCallback(response) {
                 self.ocorreuErro(response.data);
             });

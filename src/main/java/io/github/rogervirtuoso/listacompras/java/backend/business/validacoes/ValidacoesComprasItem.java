@@ -2,6 +2,9 @@ package io.github.rogervirtuoso.listacompras.java.backend.business.validacoes;
 
 import io.github.rogervirtuoso.listacompras.java.backend.model.ComprasItem;
 
+/**
+ * @author Roger
+ */
 public class ValidacoesComprasItem {
 
     public static String executarValidacoes(ComprasItem comprasItem) {
