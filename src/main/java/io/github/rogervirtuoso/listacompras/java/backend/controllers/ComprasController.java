@@ -2,7 +2,10 @@ package io.github.rogervirtuoso.listacompras.java.backend.controllers;
 
 import io.github.rogervirtuoso.listacompras.java.backend.business.ComprasBO;
 import io.github.rogervirtuoso.listacompras.java.backend.business.ComprasItemBO;
+import io.github.rogervirtuoso.listacompras.java.backend.business.validacoes.ValidacoesCompras;
+import io.github.rogervirtuoso.listacompras.java.backend.business.validacoes.ValidacoesComprasItem;
 import io.github.rogervirtuoso.listacompras.java.backend.model.Compras;
+import io.github.rogervirtuoso.listacompras.java.backend.model.ComprasItem;
 import io.github.rogervirtuoso.listacompras.java.backend.model.dto.ComprasDTO;
 
 import javax.ws.rs.*;
@@ -55,10 +58,22 @@ public class ComprasController {
     @Path("/")
     public Response create(ComprasDTO comprasDTO) {
         try {
+//          Validação compras
+            String msgValidacao = ValidacoesCompras.executarValidacoes(comprasDTO.getCompras());
+            if (msgValidacao != null) {
+                return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(msgValidacao).build();
+            }
             ComprasBO comprasBO = new ComprasBO();
             comprasDTO.setCompras(comprasBO.inserir(comprasDTO.getCompras()));
             ComprasItemBO comprasItemBO = new ComprasItemBO();
             if (comprasDTO.getComprasItemList() != null && !comprasDTO.getComprasItemList().isEmpty()) {
+//              Validação ComprasItem
+                for (ComprasItem comprasItem : comprasDTO.getComprasItemList()) {
+                    msgValidacao = ValidacoesComprasItem.executarValidacoes(comprasItem);
+                    if (msgValidacao != null) {
+                        return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(msgValidacao).build();
+                    }
+                }
                 comprasItemBO.inserirItemList(comprasDTO.getComprasItemList(), comprasDTO.getCompras());
             }
             return Response.status(Response.Status.OK).build();
@@ -73,6 +88,20 @@ public class ComprasController {
     @Path("/")
     public Response update(ComprasDTO comprasDTO) {
         try {
+//          Valicação Compras
+            String msgValidacao = ValidacoesCompras.executarValidacoes(comprasDTO.getCompras());
+            if (msgValidacao != null) {
+                return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(msgValidacao).build();
+            }
+//          Validação ComprasItem
+            if (comprasDTO.getComprasItemList() != null) {
+                for (ComprasItem comprasItem : comprasDTO.getComprasItemList()) {
+                    msgValidacao = ValidacoesComprasItem.executarValidacoes(comprasItem);
+                    if (msgValidacao != null) {
+                        return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(msgValidacao).build();
+                    }
+                }
+            }
             comprasDTO.getCompras().setStatus(Compras.Status.ALTERADO.getCodigo());
             ComprasBO comprasBO = new ComprasBO();
             comprasDTO.setCompras(comprasBO.alterar(comprasDTO.getCompras()));
@@ -101,21 +130,4 @@ public class ComprasController {
             throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
         }
     }
-
-//    @PUT
-//    @Path("{id}/")
-//    public Response concluir(@PathParam("id") long id) {
-//        try {
-//            ComprasBO comprasBus = new ComprasBO();
-//
-//            Compras compras = comprasBus.selecionar(id);
-//            compras.setStatus(Compras.Status.NOVO.getCodigo());
-//
-//            comprasBus.alterar(compras);
-//            return Response.status(Response.Status.OK).build();
-//        } catch (Exception ex) {
-//            Logger.getLogger(ComprasController.class.getName()).log(Level.SEVERE, null, ex);
-//            throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
-//        }
-//    }
 }

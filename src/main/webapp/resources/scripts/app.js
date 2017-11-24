@@ -44,7 +44,7 @@ var app = angular.module("ListaCompras", [])
                 self.compras = response.data;
                 self.atualizarTabela();
             }, function errorCallback(response) {
-                self.ocorreuErro();
+                self.ocorreuErro(response.data);
             });
         };
 
@@ -58,7 +58,7 @@ var app = angular.module("ListaCompras", [])
             }).then(function successCallback(response) {
                 self.comprasItemList = response.data.comprasItemList;
             }, function errorCallback(response) {
-                self.ocorreuErro();
+                self.ocorreuErro(response.data);
             });
         };
 
@@ -71,25 +71,16 @@ var app = angular.module("ListaCompras", [])
             }).then(function successCallback(response) {
                 self.atualizarTabela();
             }, function errorCallback(response) {
-                self.ocorreuErro();
+                self.ocorreuErro(response.data);
             });
         };
 
-        self.concluir = function (compra) {
-            self.compra = compra;
-
-            $http({
-                method: 'PUT',
-                url: urlBase + 'compras/' + self.compra.id + '/'
-            }).then(function successCallback(response) {
-                self.atualizarTabela();
-            }, function errorCallback(response) {
-                self.ocorreuErro();
-            });
-        };
-
-        self.ocorreuErro = function () {
-            alert("Ocorreu um erro inesperado!");
+        self.ocorreuErro = function (msg) {
+            if (msg != undefined) {
+                alert(msg)
+            } else {
+                alert("Ocorreu um erro inesperado!");
+            }
         };
 
         self.atualizarTabela = function () {
@@ -101,7 +92,7 @@ var app = angular.module("ListaCompras", [])
                 self.compra = undefined;
                 self.valorTotal();
             }, function errorCallback(response) {
-                self.ocorreuErro();
+                self.ocorreuErro(response.data);
             });
         };
 
@@ -112,13 +103,13 @@ var app = angular.module("ListaCompras", [])
             }).then(function successCallback(response) {
                 self.total = response.data;
             }, function errorCallback(response) {
-                self.ocorreuErro();
+                self.ocorreuErro(response.data);
             });
         };
 
         self.isEmpty = function isEmpty(obj) {
-            for(var prop in obj) {
-                if(obj.hasOwnProperty(prop) && obj.prop != "" && obj.prop != undefined)
+            for (var prop in obj) {
+                if (obj.hasOwnProperty(prop) && obj.prop != "" && obj.prop != undefined)
                     return false;
             }
             return true;
@@ -144,13 +135,13 @@ var app = angular.module("ListaCompras", [])
     });
 
 app.directive('ngConfirmClick', [
-    function(){
+    function () {
         return {
             link: function (scope, element, attr) {
                 var msg = attr.ngConfirmClick;
                 var clickAction = attr.confirmedClick;
-                element.bind('click',function (event) {
-                    if ( window.confirm(msg) ) {
+                element.bind('click', function (event) {
+                    if (window.confirm(msg)) {
                         scope.$eval(clickAction)
                     }
                 });

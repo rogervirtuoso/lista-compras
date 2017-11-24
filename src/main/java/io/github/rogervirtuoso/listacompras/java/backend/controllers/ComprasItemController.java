@@ -69,19 +69,4 @@ public class ComprasItemController {
             throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
         }
     }
-
-    public Response concluir(long id) {
-        try {
-            ComprasBO comprasBO = new ComprasBO();
-
-            Compras compras = comprasBO.selecionar(id);
-            compras.setStatus(Compras.Status.NOVO.getCodigo());
-
-            comprasBO.alterar(compras);
-            return Response.status(Response.Status.OK).build();
-        } catch (Exception ex) {
-            Logger.getLogger(ComprasItemController.class.getName()).log(Level.SEVERE, null, ex);
-            throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
-        }
-    }
 }

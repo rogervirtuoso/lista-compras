@@ -163,13 +163,10 @@
                         <td>{{compra.compras.descricaoStatus}}</td>
                         <td>{{compra.compras.dataCadastroFormatada}}</td>
                         <td>{{compra.compras.dataAlteracaoFormatada}}</td>
-                        <td>R$ {{compra.compras.totalCompras}}</td>
+                        <td>{{compra.compras.totalCompras | currency : "R$ "}}</td>
                         <td>
                             <button type="button" class="btn btn-primary" data-ng-click="controller.alterar(compra)">Alterar</button>
                             <button type="button" class="btn btn-danger" ng-confirm-click="Você tem certeza de que deseja remover?" confirmed-click="controller.deletar(compra)">Excluir</button>
-                            <!--<button type="button"-->
-                            <!--data-ng-show="compra.status !== 'FECHADO'"-->
-                            <!--data-ng-click="controller.concluir(compra)">Concluir</button>-->
                         </td>
                     </tr>
                     </tbody>
