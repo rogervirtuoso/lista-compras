@@ -14,7 +14,7 @@ var app = angular.module("ListaCompras", [])
 
         self.adicionarItem = function () {
             self.comprasItemList.push({
-                descricao: self.item.descricao,
+                descricaoProduto: self.item.descricaoProduto,
                 quantidade: self.item.quantidade,
                 valor: self.item.valor
             });
@@ -132,7 +132,7 @@ var app = angular.module("ListaCompras", [])
         }
 
         self.cleanItem = function cleanItem() {
-            self.item.descricao = " ";
+            self.item.descricaoProduto = " ";
             self.item.quantidade = 1;
             self.item.valor = 0.00;
         }

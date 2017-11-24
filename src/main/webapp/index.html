@@ -32,65 +32,78 @@
             <h1>Lista de Compras</h1>
             <div ng-show="controller.compra">
                 <form id="formExemplo" data-toggle="validator" role="form" class="bd-example">
-                    <div class="container border" >
-                    <div class="form-group">
-                        <label for="descricao">Descrição da Compra: </label>
-                        <input type="text" class="form-control" size="20" maxlength="30" id="descricao" aria-describedby="descricaoHelp" ng-model="controller.compra.compras.descricao" data-error="Por favor, informe uma descrição válida." required>
-                        <small id="descricaoHelp" class="form-text text-muted">Ex: Compras para o churrasco de domingo.</small>
-                        <div class="help-block with-errors"></div>
-                    </div>
-                    <div class="form-group">
-                        <label for="descricao">Produto: </label>
-                        <input type="text" class="form-control" size="20" maxlength="30" id="descricaoItem" ng-model="controller.item.descricao" data-error="Por favor, informe um produto válido." required/>
-                        <div class="help-block with-errors"></div>
-
-                    </div>
-                    <div class="form-group col-md-2" style="padding-left: 0px">
-                        <label for="quantidadeItem">Quantidade: </label>
-                        <input type="number"  min="1" max="999" class="form-control" id="quantidadeItem" ng-model="controller.item.quantidade" ng-init="controller.item.quantidade=1" value="1" data-error="Por favor, uma quantidade válida." required/><br>
-                        <div class="help-block with-errors"></div>
-                    </div>
-                    <div class="form-group col-md-2">
-                        <label for="valorItem">Valor: </label>
-                        <div class="input-group">
-                            <span class="input-group-addon">R$</span>
-                            <input type="number" size="20" class="form-control" step="0.01" min="0" id="valorItem" placeholder="0.00" ng-model="controller.item.valor" pattern="^\d+(?:\.\d{1,2})?$"  data-error="Por favor, informe um valor válido." required/>
+                    <div class="container" >
+                        <div class="form-group">
+                            <label for="nome">Nome da Compra: </label>
+                            <input type="text" class="form-control" size="20" maxlength="80" id="nome" aria-describedby="descricaoHelp" ng-model="controller.compra.compras.nome" data-error="Por favor, informe um nome válido." required>
+                            <small id="nomeHelp" class="form-text text-muted">Ex: Compras para o churrasco de domingo.</small>
+                            <div class="help-block with-errors"></div>
                         </div>
-                        <div class="help-block with-errors"></div>
-                    </div>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <div class="form-group col-md-10" style="padding-left: 0px">
-                        <button type="submit" class="btn btn-primary" data-ng-click="controller.adicionarItem()">Adicionar  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
-                    </div>
-                    <table class="table table-striped">
-                        <thead>
-                        <tr>
-                            <th scope="col">Ação</th>
-                            <th scope="col">Produto</th>
-                            <th scope="col">Quantidade</th>
-                            <th scope="col">Valor</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr data-ng-repeat="compraItem in controller.comprasItemList">
-                            <td><button type="submit" class="btn btn-danger btn-sm" data-ng-click="controller.removerItem(compraItem)"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button></td>
-                            <td>{{compraItem.descricao}}</td>
-                            <td>{{compraItem.quantidade}}</td>
-                            <td>R$ {{compraItem.valor}}</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                    <div class="form-group">
-                        <button type="button" class="btn btn-success" data-ng-click="controller.salvar()">Salvar</button>
-                        <button type="button" class="btn btn-danger" data-ng-click="controller.clean()">Cancelar</button>
-                    </div>
+                        <div class="form-group">
+                            <label for="observacao">Observação</label>
+                            <textarea class="form-control" id="observacao" rows="4" ng-model="controller.compra.compras.observacao"></textarea>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <label for="nome">Item</label>
+                            </div>
+                            <div class="panel-body">
+                                <div style="padding: 1.5rem;border: solid #f7f7f9;border-width: 2px;">
+                                    <div class="form-group">
+                                        <label for="descricaoItem">Produto: </label>
+                                        <input type="text" class="form-control" size="20" maxlength="30" id="descricaoItem" ng-model="controller.item.descricaoProduto" data-error="Por favor, informe um produto válido." required/>
+                                        <div class="help-block with-errors"></div>
+
+                                    </div>
+                                    <div class="form-group col-md-2" style="padding-left: 0px">
+                                        <label for="quantidadeItem">Quantidade: </label>
+                                        <input type="number"  min="1" max="999" class="form-control" id="quantidadeItem" ng-model="controller.item.quantidade" ng-init="controller.item.quantidade=1" value="1" data-error="Por favor, uma quantidade válida." required/><br>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                    <div class="form-group col-md-2">
+                                        <label for="valorItem">Valor: </label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">R$</span>
+                                            <input type="number" size="20" class="form-control" step="0.01" min="0" id="valorItem" placeholder="0.00" ng-model="controller.item.valor" pattern="^\d+(?:\.\d{1,2})?$" data-error="Por favor, informe um valor válido." required/>
+                                        </div>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <div class="form-group col-md-10" style="padding-left: 0px">
+                                        <button type="submit" class="btn btn-primary" data-ng-click="controller.adicionarItem()">Adicionar  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+                                    </div>
+                                    <table class="table table-striped">
+                                        <thead>
+                                        <tr>
+                                            <th scope="col">Ação</th>
+                                            <th scope="col">Produto</th>
+                                            <th scope="col">Quantidade</th>
+                                            <th scope="col">Valor</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr data-ng-repeat="compraItem in controller.comprasItemList">
+                                            <td><button type="submit" class="btn btn-danger btn-sm" data-ng-click="controller.removerItem(compraItem)"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button></td>
+                                            <td>{{compraItem.descricaoProduto}}</td>
+                                            <td>{{compraItem.quantidade}}</td>
+                                            <td>{{compraItem.valor | currency : "R$ "}}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div><!-- fim .panel-body -->
+                        </div><!-- fim .panel -->
+                        <div class="form-group">
+                            <button type="button" class="btn btn-success" data-ng-click="controller.salvar()">Salvar</button>
+                            <button type="button" class="btn btn-danger" ng-confirm-click="Deseja mesmo cancelar?" confirmed-click="controller.clean()">Cancelar</button>
+                        </div>
                     </div>
                 </form>
             </div>
@@ -102,7 +115,7 @@
                     <thead>
                     <tr>
                         <th scope="col">Código</th>
-                        <th scope="col">Descrição</th>
+                        <th scope="col">Nome</th>
                         <th scope="col">Situação</th>
                         <th scope="col">Data de Cadastro</th>
                         <th scope="col">Data de Alteração</th>
@@ -112,7 +125,7 @@
                     <tbody>
                     <tr data-ng-repeat="compra in controller.compras">
                         <td>{{compra.compras.id}}</td>
-                        <td>{{compra.compras.descricao}}</td>
+                        <td>{{compra.compras.nome}}</td>
                         <td>{{compra.compras.descricaoStatus}}</td>
                         <td>{{compra.compras.dataCadastroFormatada}}</td>
                         <td>{{compra.compras.dataAlteracaoFormatada}}</td>
@@ -129,8 +142,8 @@
                 </table>
             </div>
             <div class="form-group" data-ng-show="!controller.compra">
-                <label for="descricao">Total Geral: </label>
-                <input type="text" disabled id="total" placeholder="R$ " ng-model="controller.total"><br>
+                <label for="totalGeral">Total Geral: </label>
+                <input type="text" disabled id="total" placeholder="R$ " step="0.01" pattern="^\d+(?:\.\d{1,2})?$" ng-model="controller.total | currency : 'R$ '"><br>
             </div>
         </div>
     </div>
