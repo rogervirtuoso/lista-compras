@@ -29,6 +29,5 @@ Instruções para subir a aplicação:
   * Uma opção que pode facilitar é realizar o deploy da própria IDE, no caso, utilizado o IntelliJ.
 
 
-    Projeto ainda em fase de desenvolvimento.
 
 
