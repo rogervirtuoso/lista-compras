@@ -10,6 +10,8 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+        <!--style.css adaptado de https://e-gov.betha.com.br/-->
+        <link rel="stylesheet" href="resources/css/style.css">
         <style>
             body {
                 padding-top: 50px;
@@ -27,9 +29,41 @@
         </style>
         <link rel="shortcut icon" href="images/favicon.ico" />
     </head>
-    <body class="container" ng-app="ListaCompras">
-        <div ng-controller="ComprasController as controller">
-            <h1>Lista de Compras</h1>
+    <body class="container" ng-app="ListaCompras" style="padding-top: 0px; width: 75%">
+        <!--<nav class="navbar navbar-default">-->
+            <!--<div class="container-fluid">-->
+                <!--<div class="navbar-header">-->
+                    <!--<a class="navbar-brand" href="#">Lista de Compras Betha</a>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</nav>-->
+        <div class="wrapper">
+            <div class="nav">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="logo"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <table class="barra-produtos iv">
+                <tr>
+                    <td class="mun"></td>
+                    <td class="pla"></td>
+                    <td class="arr"></td>
+                    <td class="ate"></td>
+                    <td class="com"></td>
+                    <td class="pes"></td>
+                    <td class="sau"></td>
+                    <td class="edu"></td>
+                    <td class="lei"></td>
+                </tr>
+            </table>
+        <div class="content" ng-controller="ComprasController as controller">
+            <div class="page-header">
+                <h1>Lista de Compras</h1>
+            </div>
             <div ng-show="controller.compra">
                 <form id="formExemplo" data-toggle="validator" role="form" class="bd-example">
                     <div class="container" >
@@ -147,8 +181,8 @@
             </div>
         </div>
     </div>
-    <script src="resources/angular.js"></script>
-    <script src="resources/app.js"></script>
-    <script src="resources/validator.min.js"></script>
+    <script src="resources/scripts/angular.js"></script>
+    <script src="resources/scripts/app.js"></script>
+    <script src="resources/scripts/validator.min.js"></script>
 </body>
 </html>
