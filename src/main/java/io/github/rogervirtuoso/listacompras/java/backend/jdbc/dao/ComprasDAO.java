@@ -33,7 +33,7 @@ public class ComprasDAO {
 
         try {
             PreparedStatement sql = this.conexao.getConnection().prepareStatement(sqlQuery);
-            sql.setString(1, compras.getDescricao());
+            sql.setString(1, compras.getNome());
             sql.setLong(2, compras.getStatus());
             sql.setDate(3, new java.sql.Date(compras.getDataCadastro().getTime()));
             sql.setDate(4, new java.sql.Date(compras.getDataAlteracao().getTime()));
@@ -58,7 +58,7 @@ public class ComprasDAO {
 
         try {
             PreparedStatement stmt = this.conexao.getConnection().prepareStatement(sqlQuery);
-            stmt.setString(1, compras.getDescricao());
+            stmt.setString(1, compras.getNome());
             stmt.setInt(2, compras.getStatus().intValue());
             stmt.setDate(3, new java.sql.Date(compras.getDataCadastro().getTime()));
             stmt.setDate(4, new java.sql.Date(compras.getDataCadastro().getTime()));
@@ -132,7 +132,7 @@ public class ComprasDAO {
         Compras compras = new Compras();
 
         compras.setId(resultSet.getLong("i_compras"));
-        compras.setDescricao(resultSet.getString("descricao"));
+        compras.setNome(resultSet.getString("nome"));
         compras.setStatus(resultSet.getLong("status"));
         Date dataCadastro = new Date();
         dataCadastro.setTime(resultSet.getDate("dt_cadastro").getTime());

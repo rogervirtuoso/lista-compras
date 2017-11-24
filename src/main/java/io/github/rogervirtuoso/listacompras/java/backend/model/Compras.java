@@ -18,7 +18,7 @@ public class Compras implements Serializable {
     private long id;
 
     @Column(length = 30, nullable = false)
-    private String descricao;
+    private String nome;
 
     @Column(length = 200)
     private String observacao;
@@ -54,12 +54,12 @@ public class Compras implements Serializable {
         this.id = id;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public String getNome() {
+        return nome;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public String getObservacao() {
@@ -129,8 +129,8 @@ public class Compras implements Serializable {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("Descrição: ");
-        sb.append(getDescricao());
+        StringBuilder sb = new StringBuilder("Nome da Lista: ");
+        sb.append(getNome());
 
         return sb.toString();
     }

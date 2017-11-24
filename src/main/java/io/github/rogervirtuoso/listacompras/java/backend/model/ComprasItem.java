@@ -18,8 +18,8 @@ public class ComprasItem implements Serializable {
     @JoinColumn(name = "id_compras", nullable = false)
     private Compras compras;
 
-    @Column(length = 80, nullable = false)
-    private String descricao;
+    @Column(name = "descricao_produto", length = 80, nullable = false)
+    private String descricaoProduto;
 
     @Column(length = 8, nullable = false)
     private Long quantidade;
@@ -43,12 +43,12 @@ public class ComprasItem implements Serializable {
         this.compras = compras;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public String getDescricaoProduto() {
+        return descricaoProduto;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public void setDescricaoProduto(String descricaoProduto) {
+        this.descricaoProduto = descricaoProduto;
     }
 
     public Long getQuantidade() {
@@ -94,8 +94,8 @@ public class ComprasItem implements Serializable {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("Descrição: ");
-        sb.append(getDescricao());
+        StringBuilder sb = new StringBuilder("Produto: ");
+        sb.append(getDescricaoProduto());
 
         return sb.toString();
     }
